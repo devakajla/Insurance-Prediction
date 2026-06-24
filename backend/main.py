@@ -14,7 +14,7 @@ app.add_middleware(
 def fun():
     return {'Message':'Hello World'}
 
-from routers import analytics, predict
+from routers import analytics, predict, model_info
 from services.ml_service import load_model
 
 app.include_router(analytics.router, prefix="/api/analytics")
@@ -24,3 +24,5 @@ app.include_router(predict.router, prefix="/api/predict")
 @app.on_event("startup")
 def startup():
     load_model()
+
+app.include_router(model_info.router, prefix="/api/models")
